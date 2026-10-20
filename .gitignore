@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+dev/
+venv/
+.vscode/
+.DS_Store
+*.egg-info/
+
+# model weights and caches
+models/
+*.bin
+*.safetensors
+.cache/
+
+# run outputs
+results/
+debug_prob*.json
+*.out
+*.log

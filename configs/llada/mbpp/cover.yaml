@@ -1,0 +1,31 @@
+dataset_name: 'mbpp'
+model_path: 'GSAI-ML/LLaDA-8B-Instruct'
+data_root: ''
+
+dataset_config:
+  data_loader: 'custom_loader'
+  loader_fn: 'mbpp_read_data'
+  load_dataset_args: { path: "./data/mbpp/mbpp.jsonl" }
+  split: null
+  doc_to_text_fn: "mbpp_doc_to_text"
+  extract_answer_fn: "mbpp_extract_answer"
+  is_correct_fn: null
+  eval_mode: "save_only"
+  prompt_suffix: ""
+  output_formatter: 'humaneval'
+  problem_file: "./data/mbpp/mbpp_test.jsonl"
+
+generation_args:
+  gen_length: 256
+  block_length: 32
+  temperature: 0.0
+
+method: 'cover'
+method_args:
+  cover:
+    tau_draft: 0.6
+    max_unmask_per_step: 15  # paper drafting budget B = 15
+    max_reverify_times: 5    # paper REMASK budget M_remask ~ 5
+    use_attention_score: true  # attention-aware seed selection (authors' run_cover script setting)
+
+config_name: 'llada_mbpp_cover'

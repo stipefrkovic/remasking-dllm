@@ -1,0 +1,29 @@
+dataset_name: 'math500'
+model_path: 'Dream-org/Dream-v0-Instruct-7B'
+model_type: 'dream'
+data_root: ''
+
+dataset_config:
+  data_loader: 'huggingface'
+  loader_fn: null
+  load_dataset_args: { path: "HuggingFaceH4/MATH-500" }
+  split: "test"
+  doc_to_text_fn: "math500_doc_to_text"
+  extract_answer_fn: "math500_extract_answer"
+  is_correct_fn: "math500_is_equiv"
+  eval_mode: "binary"
+  prompt_suffix: "<reasoning>"
+
+generation_args:
+  gen_length: 256
+  block_length: 32
+  temperature: 0.0
+
+method: 'wino'
+method_args:
+  wino:
+    threshold: 0.6
+    threshold_back: 0.0
+    disable_max_accept: true
+
+config_name: 'dream_math500_fastdllm'
